@@ -1,7 +1,11 @@
 from random import randint
+import score
+
+file =score.f_managing()
 
 class juego:
     def __init__ (self):
+        self.puntaje = 1
         pass 
 
 
@@ -13,15 +17,24 @@ class juego:
         while (True):
             adiv = int(input())
 
-            if adiv > self.numero:
-                print("Tu numero es mayor al de la maquina")
+            if adiv != '':
 
-            elif adiv < self.numero:
-                print("Tu numero es menor")
+                if adiv > self.numero:
+                    print("Tu numero es mayor al de la maquina")
+                    self.puntaje += 1
+
+                elif adiv < self.numero:
+                    print("Tu numero es menor al de la maquina")
+                    self.puntaje += 1
+
+                else:
+                    print ("adivinaste")
+                    file.nuevo(self.puntaje)
+                    print ("Tu puntaje", self.puntaje, "\n", "Puntaje mas alto: ", file.leer())
+                    break
 
             else:
-                print ("adivinaste")
-                break
+                print("Ingresa un numero valido")
 
 
 
