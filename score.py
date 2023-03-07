@@ -2,9 +2,9 @@ class f_managing:
 
     def __init__ (self):
         try:
-            self.f = open ("NumberGuesser_p1/puntaje.txt", "x")
+            self.f = open ("puntaje.txt", "x")
         except:
-            self.f = open ('NumberGuesser_p1/puntaje.txt', 'r')
+            self.f = open ('puntaje.txt', 'r')
 
 
     def nuevo (self, puntaje):
@@ -14,10 +14,12 @@ class f_managing:
             pun = 100
         
         if puntaje < pun:
-            f = open('NumberGuesser_p1/puntaje.txt', 'w')
+            self.f.close()
+            f = open('puntaje.txt', 'w')
             f.write(str(puntaje))
 
     def leer (self):
-        f = open('NumberGuesser_p1/puntaje.txt', 'r')
+        self.f.close()
+        f = open('puntaje.txt', 'r')
         return f.read()
 

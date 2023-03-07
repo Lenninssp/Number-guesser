@@ -1,32 +1,57 @@
+
 import customtkinter
+from random import randint
+import score
 
-customtkinter.set_appearance_mode("dark")
+file =score.f_managing()
 
-customtkinter.set_default_color_theme("dark-blue")
+class App(customtkinter.CTk):
+    def __init__(self):
 
-root = customtkinter.CTk()
-root.geometry("500x350")
+        super().__init__()
 
-def login():
-    print("Test")
+        self.puntaje=1
+        self.numero = randint (0, 100)
+        print("la maquina ya pensó en un numero entre uno a 100")
+        
+        self.geometry("300x200")
+        self.title("Number guesser")
+        self.minsize(300,300)
+        self.maxsize(300,300)
 
+        self.grid_rowconfigure(4,weight=1)
+        self.grid_columnconfigure((0,3), weight=1)
 
-frame = customtkinter.CTkFrame(master=root)
-frame.pack(pady=20, padx=60, fill="both", expand=True)
+        self.text= customtkinter.CTkTextbox(master=self,font=("American Typewriter",25),width=80, height=20)
+        self.text.grid(row=2, column=2, columnspan=1, padx=10, pady=10, sticky="ew")
 
-label = customtkinter.CTkLabel(master=frame, text="Login System", font=("Roboto",24))
-label.pack(pady=12, padx=10)
+        self.button = customtkinter.CTkButton(master=self, text="Text", command=self.test)
+        self.button.grid(row=3, column=2, padx=20, sticky="ew")
+        
+    def test(self):
 
-entry1 = customtkinter.CTkEntry(master=frame, placeholder_text="Username")
-entry1.pack(pady=12, padx=10)
+        self.intento=int(self.text.get("0.0","end"))
 
-entry2 = customtkinter.CTkEntry(master=frame, placeholder_text="Password", show="*")
-entry2.pack(pady=12, padx=10)
+        if self.intento != '':
 
-button = customtkinter.CTkButton(master=frame, text="Login")
-button.pack(pady=12, padx=10)
+                if self.intento > self.numero:
+                    self.frame("Tu numero es mayor al de la maquina")
+                    self.puntaje += 1
 
-checkbox = customtkinter.CTkCheckBox(master = frame, text="Remember")
-checkbox.pack(pady=12, padx=10)
+                elif self.intento < self.numero:
+                    self.frame("Tu numero es menor al de la maquina")
+                    self.puntaje += 1
 
-root.mainloop()
+                else:
+                    textov = "adivinaste \n Tu puntaje", self.puntaje, "\n", "Puntaje mas alto: ", file.leer()
+                    
+                    self.frame (textov)
+                    file.nuevo(self.puntaje)
+                    
+    
+    def frame (self, texto):
+         self.label = customtkinter.CTkLabel(master=self, text=texto)
+         self.label.grid(row=4, column=2, padx=10, sticky="ew")
+                    
+
+        

@@ -1,11 +1,20 @@
 import program
+import UI
 
 if __name__ == "__main__":
     print("Funcionando")
 
-    p = program.juego()
+    var = input("1 para UI, 2 para terminal, 0 para salir\n")
 
-    p.what_number()
+    if var == "1":
+        app = UI.App()
+        app.mainloop()
 
-    p.mayorMenor()
+    elif var == "2":
+        p = program.juego()
+        p.what_number()
+        p.mayorMenor()
+
+    else:
+        pass
 
